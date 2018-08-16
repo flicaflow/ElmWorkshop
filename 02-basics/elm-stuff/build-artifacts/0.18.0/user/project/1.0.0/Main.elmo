@@ -1,0 +1,159 @@
+var _user$project$Main$print = function (er) {
+	return A2(
+		_elm_lang$core$Basics_ops['++'],
+		er.name,
+		A2(
+			_elm_lang$core$Basics_ops['++'],
+			' (',
+			A2(
+				_elm_lang$core$Basics_ops['++'],
+				_elm_lang$core$Basics$toString(er.age),
+				')')));
+};
+var _user$project$Main$letItPrint = A2(
+	_elm_lang$core$Debug$log,
+	'ExtR: ',
+	_user$project$Main$print(
+		{a: 1.2, name: 'Me', age: 33}));
+var _user$project$Main$changeAge = function (r) {
+	return _elm_lang$core$Native_Utils.update(
+		r,
+		{age: r.age + 1});
+};
+var _user$project$Main$printR = function (r) {
+	return A2(
+		_elm_lang$core$Debug$log,
+		'R: ',
+		A2(
+			_elm_lang$core$Basics_ops['++'],
+			r.name,
+			A2(
+				_elm_lang$core$Basics_ops['++'],
+				' (',
+				A2(
+					_elm_lang$core$Basics_ops['++'],
+					_elm_lang$core$Basics$toString(r.age),
+					')'))));
+};
+var _user$project$Main$testPrintR = _user$project$Main$printR(
+	{name: 'Me', age: 33});
+var _user$project$Main$vR = {name: 'Me', age: 42};
+var _user$project$Main$first = function (_p0) {
+	var _p1 = _p0;
+	return _p1._0;
+};
+var _user$project$Main$aTuple = {ctor: '_Tuple2', _0: 1, _1: 2};
+var _user$project$Main$firstFromList = function (l) {
+	var _p2 = l;
+	if (_p2.ctor === '::') {
+		return _p2._0;
+	} else {
+		return -1;
+	}
+};
+var _user$project$Main$firstFromList1 = function (l) {
+	var maybeFirst = _elm_lang$core$List$head(l);
+	var _p3 = maybeFirst;
+	if (_p3.ctor === 'Just') {
+		return _p3._0;
+	} else {
+		return -1;
+	}
+};
+var _user$project$Main$aList = {
+	ctor: '::',
+	_0: 1,
+	_1: {
+		ctor: '::',
+		_0: 2,
+		_1: {
+			ctor: '::',
+			_0: 3,
+			_1: {
+				ctor: '::',
+				_0: 4,
+				_1: {
+					ctor: '::',
+					_0: 5,
+					_1: {ctor: '[]'}
+				}
+			}
+		}
+	}
+};
+var _user$project$Main$addOnFront = {ctor: '::', _0: 0, _1: _user$project$Main$aList};
+var _user$project$Main$normalize2 = function (_p4) {
+	var _p5 = _p4;
+	var _p8 = _p5._2;
+	var _p7 = _p5._1;
+	var _p6 = _p5._0;
+	var sum = (_p6 + _p7) + _p8;
+	return {ctor: '_Tuple3', _0: _p6 / sum, _1: _p7 / sum, _2: _p8 / sum};
+};
+var _user$project$Main$normalize1 = function (_p9) {
+	var _p10 = _p9;
+	var _p13 = _p10._2;
+	var _p12 = _p10._1;
+	var _p11 = _p10._0;
+	return {ctor: '_Tuple3', _0: _p11 / ((_p11 + _p12) + _p13), _1: _p12 / ((_p11 + _p12) + _p13), _2: _p13 / ((_p11 + _p12) + _p13)};
+};
+var _user$project$Main$toString = function (t) {
+	var _p14 = t;
+	switch (_p14.ctor) {
+		case 'A':
+			return 'A';
+		case 'B':
+			return 'B';
+		default:
+			return 'C';
+	}
+};
+var _user$project$Main$greaterZero = function (x) {
+	return (_elm_lang$core$Native_Utils.cmp(x, 0) > 0) ? true : false;
+};
+var _user$project$Main$add = F2(
+	function (a, b) {
+		return a + b;
+	});
+var _user$project$Main$noPipes = F2(
+	function (a, b) {
+		return _elm_lang$core$Basics$sqrt(
+			A2(
+				_elm_lang$core$Basics$max,
+				10,
+				A2(
+					_elm_lang$core$Basics$min,
+					100,
+					A2(_user$project$Main$add, a, b))));
+	});
+var _user$project$Main$withPipes = F2(
+	function (a, b) {
+		return _elm_lang$core$Basics$sqrt(
+			A2(
+				_elm_lang$core$Basics$max,
+				10,
+				A2(
+					_elm_lang$core$Basics$min,
+					100,
+					A2(_user$project$Main$add, a, b))));
+	});
+var _user$project$Main$withMorePipes = F2(
+	function (a, b) {
+		return _elm_lang$core$Basics$sqrt(
+			A2(
+				_elm_lang$core$Basics$max,
+				10,
+				A2(
+					_elm_lang$core$Basics$min,
+					100,
+					A2(_user$project$Main$add, b, a))));
+	});
+var _user$project$Main$aString = 'Hello';
+var _user$project$Main$aNumber = 777;
+var _user$project$Main$R = F2(
+	function (a, b) {
+		return {name: a, age: b};
+	});
+var _user$project$Main$C = {ctor: 'C'};
+var _user$project$Main$B = {ctor: 'B'};
+var _user$project$Main$A = {ctor: 'A'};
