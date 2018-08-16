@@ -12,14 +12,13 @@ import TodoList
 
 
 type alias Model =
-    { todos : List String
-    , inputText : String
+    { todoList : TodoList.State
     }
 
 
 initialModel : Model
 initialModel =
-    Model [] ""
+    Model TodoList.initialState
 
 
 
@@ -29,38 +28,18 @@ initialModel =
 update : Msg -> Model -> Model
 update msg model =
     case msg of
-        Add todo ->
-            { model
-                | todos = todo :: model.todos
-                , inputText = ""
-            }
+        AddTodoList ->
+            model
 
-        Delete i ->
-            { model
-                | todos =
-                    List.append
-                        (List.take i model.todos)
-                        (List.drop (i + 1) model.todos)
-            }
-
-        UpdateInput inp ->
-            { model
-                | inputText = inp
-            }
-
-
-todoConfig =
-    { updateInput = UpdateInput
-    , add = Add
-    , delete = Delete
-    }
+        TodoListMsg msg ->
+            { model | todoList = TodoList.update msg model.todoList }
 
 
 view : Model -> Html Msg
 view model =
     div []
         [ button [] [ text "+" ]
-        , TodoList.view todoConfig model.todos model.inputText
+        , TodoList.view model.todoList TodoListMsg
         ]
 
 

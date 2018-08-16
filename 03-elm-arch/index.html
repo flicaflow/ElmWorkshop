@@ -8231,142 +8231,7 @@ var _elm_lang$html$Html_Events$Options = F2(
 	function (a, b) {
 		return {stopPropagation: a, preventDefault: b};
 	});
-var _user$project$Msg$UpdateInput = function (a) {
-	return {ctor: 'UpdateInput', _0: a};
-};
-var _user$project$Msg$Delete = function (a) {
-	return {ctor: 'Delete', _0: a};
-};
-var _user$project$Msg$Add = function (a) {
-	return {ctor: 'Add', _0: a};
-};
-var _user$project$TodoList$view = F3(
-	function (conf, todos, inputText) {
-		return A2(
-			_elm_lang$html$Html$div,
-			{ctor: '[]'},
-			{
-				ctor: '::',
-				_0: A2(
-					_elm_lang$html$Html$h1,
-					{ctor: '[]'},
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html$text('Todo List'),
-						_1: {ctor: '[]'}
-					}),
-				_1: {
-					ctor: '::',
-					_0: A2(
-						_elm_lang$html$Html$input,
-						{
-							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$type_('text'),
-							_1: {
-								ctor: '::',
-								_0: _elm_lang$html$Html_Attributes$placeholder('type here'),
-								_1: {
-									ctor: '::',
-									_0: _elm_lang$html$Html_Attributes$value(inputText),
-									_1: {
-										ctor: '::',
-										_0: _elm_lang$html$Html_Events$onInput(conf.updateInput),
-										_1: {ctor: '[]'}
-									}
-								}
-							}
-						},
-						{ctor: '[]'}),
-					_1: {
-						ctor: '::',
-						_0: A2(
-							_elm_lang$html$Html$button,
-							{
-								ctor: '::',
-								_0: _elm_lang$html$Html_Events$onClick(
-									conf.add(inputText)),
-								_1: {ctor: '[]'}
-							},
-							{
-								ctor: '::',
-								_0: _elm_lang$html$Html$text('add'),
-								_1: {ctor: '[]'}
-							}),
-						_1: {
-							ctor: '::',
-							_0: A2(
-								_elm_lang$html$Html$ul,
-								{ctor: '[]'},
-								A2(
-									_elm_lang$core$List$indexedMap,
-									F2(
-										function (i, item) {
-											return A2(
-												_elm_lang$html$Html$li,
-												{ctor: '[]'},
-												{
-													ctor: '::',
-													_0: A2(
-														_elm_lang$html$Html$span,
-														{ctor: '[]'},
-														{
-															ctor: '::',
-															_0: _elm_lang$html$Html$text(item),
-															_1: {ctor: '[]'}
-														}),
-													_1: {
-														ctor: '::',
-														_0: A2(
-															_elm_lang$html$Html$button,
-															{
-																ctor: '::',
-																_0: _elm_lang$html$Html_Events$onClick(
-																	conf.$delete(i)),
-																_1: {ctor: '[]'}
-															},
-															{
-																ctor: '::',
-																_0: _elm_lang$html$Html$text('delete'),
-																_1: {ctor: '[]'}
-															}),
-														_1: {ctor: '[]'}
-													}
-												});
-										}),
-									todos)),
-							_1: {ctor: '[]'}
-						}
-					}
-				}
-			});
-	});
-var _user$project$TodoList$Config = F3(
-	function (a, b, c) {
-		return {updateInput: a, add: b, $delete: c};
-	});
-var _user$project$Main$todoConfig = {updateInput: _user$project$Msg$UpdateInput, add: _user$project$Msg$Add, $delete: _user$project$Msg$Delete};
-var _user$project$Main$view = function (model) {
-	return A2(
-		_elm_lang$html$Html$div,
-		{ctor: '[]'},
-		{
-			ctor: '::',
-			_0: A2(
-				_elm_lang$html$Html$button,
-				{ctor: '[]'},
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html$text('+'),
-					_1: {ctor: '[]'}
-				}),
-			_1: {
-				ctor: '::',
-				_0: A3(_user$project$TodoList$view, _user$project$Main$todoConfig, model.todos, model.inputText),
-				_1: {ctor: '[]'}
-			}
-		});
-};
-var _user$project$Main$update = F2(
+var _user$project$TodoList$update = F2(
 	function (msg, model) {
 		var _p0 = msg;
 		switch (_p0.ctor) {
@@ -8393,14 +8258,168 @@ var _user$project$Main$update = F2(
 					{inputText: _p0._0});
 		}
 	});
-var _user$project$Main$Model = F2(
+var _user$project$TodoList$State = F2(
 	function (a, b) {
 		return {todos: a, inputText: b};
 	});
-var _user$project$Main$initialModel = A2(
-	_user$project$Main$Model,
+var _user$project$TodoList$initialState = A2(
+	_user$project$TodoList$State,
 	{ctor: '[]'},
 	'');
+var _user$project$TodoList$UpdateInput = function (a) {
+	return {ctor: 'UpdateInput', _0: a};
+};
+var _user$project$TodoList$Delete = function (a) {
+	return {ctor: 'Delete', _0: a};
+};
+var _user$project$TodoList$Add = function (a) {
+	return {ctor: 'Add', _0: a};
+};
+var _user$project$TodoList$view = F2(
+	function (state, tagger) {
+		return A2(
+			_elm_lang$html$Html$map,
+			tagger,
+			A2(
+				_elm_lang$html$Html$div,
+				{ctor: '[]'},
+				{
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$h1,
+						{ctor: '[]'},
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html$text('Todo List'),
+							_1: {ctor: '[]'}
+						}),
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$input,
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$type_('text'),
+								_1: {
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$placeholder('type here'),
+									_1: {
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$value(state.inputText),
+										_1: {
+											ctor: '::',
+											_0: _elm_lang$html$Html_Events$onInput(_user$project$TodoList$UpdateInput),
+											_1: {ctor: '[]'}
+										}
+									}
+								}
+							},
+							{ctor: '[]'}),
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$button,
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html_Events$onClick(
+										_user$project$TodoList$Add(state.inputText)),
+									_1: {ctor: '[]'}
+								},
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html$text('add'),
+									_1: {ctor: '[]'}
+								}),
+							_1: {
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$ul,
+									{ctor: '[]'},
+									A2(
+										_elm_lang$core$List$indexedMap,
+										F2(
+											function (i, item) {
+												return A2(
+													_elm_lang$html$Html$li,
+													{ctor: '[]'},
+													{
+														ctor: '::',
+														_0: A2(
+															_elm_lang$html$Html$span,
+															{ctor: '[]'},
+															{
+																ctor: '::',
+																_0: _elm_lang$html$Html$text(item),
+																_1: {ctor: '[]'}
+															}),
+														_1: {
+															ctor: '::',
+															_0: A2(
+																_elm_lang$html$Html$button,
+																{
+																	ctor: '::',
+																	_0: _elm_lang$html$Html_Events$onClick(
+																		_user$project$TodoList$Delete(i)),
+																	_1: {ctor: '[]'}
+																},
+																{
+																	ctor: '::',
+																	_0: _elm_lang$html$Html$text('delete'),
+																	_1: {ctor: '[]'}
+																}),
+															_1: {ctor: '[]'}
+														}
+													});
+											}),
+										state.todos)),
+								_1: {ctor: '[]'}
+							}
+						}
+					}
+				}));
+	});
+var _user$project$Msg$TodoListMsg = function (a) {
+	return {ctor: 'TodoListMsg', _0: a};
+};
+var _user$project$Msg$AddTodoList = {ctor: 'AddTodoList'};
+var _user$project$Main$view = function (model) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{ctor: '[]'},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$button,
+				{ctor: '[]'},
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html$text('+'),
+					_1: {ctor: '[]'}
+				}),
+			_1: {
+				ctor: '::',
+				_0: A2(_user$project$TodoList$view, model.todoList, _user$project$Msg$TodoListMsg),
+				_1: {ctor: '[]'}
+			}
+		});
+};
+var _user$project$Main$update = F2(
+	function (msg, model) {
+		var _p0 = msg;
+		if (_p0.ctor === 'AddTodoList') {
+			return model;
+		} else {
+			return _elm_lang$core$Native_Utils.update(
+				model,
+				{
+					todoList: A2(_user$project$TodoList$update, _p0._0, model.todoList)
+				});
+		}
+	});
+var _user$project$Main$Model = function (a) {
+	return {todoList: a};
+};
+var _user$project$Main$initialModel = _user$project$Main$Model(_user$project$TodoList$initialState);
 var _user$project$Main$main = _elm_lang$html$Html$beginnerProgram(
 	{model: _user$project$Main$initialModel, view: _user$project$Main$view, update: _user$project$Main$update})();
 var Elm = {};

@@ -1,13 +1,11 @@
 module Msg exposing (Msg(..))
 
+import TodoList
+
+
 -- Messages
 
 
 type Msg
-    = Add String
-    | Delete Int
-    | UpdateInput String
-
-
-type alias M2 =
-    Msg
+    = AddTodoList
+    | TodoListMsg TodoList.Msg

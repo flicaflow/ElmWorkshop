@@ -1,0 +1,4 @@
+var _user$project$Msg$TodoListMsg = function (a) {
+	return {ctor: 'TodoListMsg', _0: a};
+};
+var _user$project$Msg$AddTodoList = {ctor: 'AddTodoList'};

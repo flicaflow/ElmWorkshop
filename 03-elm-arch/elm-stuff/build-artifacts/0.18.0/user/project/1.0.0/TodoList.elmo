@@ -1,0 +1,147 @@
+var _user$project$TodoList$update = F2(
+	function (msg, model) {
+		var _p0 = msg;
+		switch (_p0.ctor) {
+			case 'Add':
+				return _elm_lang$core$Native_Utils.update(
+					model,
+					{
+						todos: {ctor: '::', _0: _p0._0, _1: model.todos},
+						inputText: ''
+					});
+			case 'Delete':
+				var _p1 = _p0._0;
+				return _elm_lang$core$Native_Utils.update(
+					model,
+					{
+						todos: A2(
+							_elm_lang$core$List$append,
+							A2(_elm_lang$core$List$take, _p1, model.todos),
+							A2(_elm_lang$core$List$drop, _p1 + 1, model.todos))
+					});
+			default:
+				return _elm_lang$core$Native_Utils.update(
+					model,
+					{inputText: _p0._0});
+		}
+	});
+var _user$project$TodoList$State = F2(
+	function (a, b) {
+		return {todos: a, inputText: b};
+	});
+var _user$project$TodoList$initialState = A2(
+	_user$project$TodoList$State,
+	{ctor: '[]'},
+	'');
+var _user$project$TodoList$UpdateInput = function (a) {
+	return {ctor: 'UpdateInput', _0: a};
+};
+var _user$project$TodoList$Delete = function (a) {
+	return {ctor: 'Delete', _0: a};
+};
+var _user$project$TodoList$Add = function (a) {
+	return {ctor: 'Add', _0: a};
+};
+var _user$project$TodoList$view = F2(
+	function (state, tagger) {
+		return A2(
+			_elm_lang$html$Html$map,
+			tagger,
+			A2(
+				_elm_lang$html$Html$div,
+				{ctor: '[]'},
+				{
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$h1,
+						{ctor: '[]'},
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html$text('Todo List'),
+							_1: {ctor: '[]'}
+						}),
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$input,
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$type_('text'),
+								_1: {
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$placeholder('type here'),
+									_1: {
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$value(state.inputText),
+										_1: {
+											ctor: '::',
+											_0: _elm_lang$html$Html_Events$onInput(_user$project$TodoList$UpdateInput),
+											_1: {ctor: '[]'}
+										}
+									}
+								}
+							},
+							{ctor: '[]'}),
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$button,
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html_Events$onClick(
+										_user$project$TodoList$Add(state.inputText)),
+									_1: {ctor: '[]'}
+								},
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html$text('add'),
+									_1: {ctor: '[]'}
+								}),
+							_1: {
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$ul,
+									{ctor: '[]'},
+									A2(
+										_elm_lang$core$List$indexedMap,
+										F2(
+											function (i, item) {
+												return A2(
+													_elm_lang$html$Html$li,
+													{ctor: '[]'},
+													{
+														ctor: '::',
+														_0: A2(
+															_elm_lang$html$Html$span,
+															{ctor: '[]'},
+															{
+																ctor: '::',
+																_0: _elm_lang$html$Html$text(item),
+																_1: {ctor: '[]'}
+															}),
+														_1: {
+															ctor: '::',
+															_0: A2(
+																_elm_lang$html$Html$button,
+																{
+																	ctor: '::',
+																	_0: _elm_lang$html$Html_Events$onClick(
+																		_user$project$TodoList$Delete(i)),
+																	_1: {ctor: '[]'}
+																},
+																{
+																	ctor: '::',
+																	_0: _elm_lang$html$Html$text('delete'),
+																	_1: {ctor: '[]'}
+																}),
+															_1: {ctor: '[]'}
+														}
+													});
+											}),
+										state.todos)),
+								_1: {ctor: '[]'}
+							}
+						}
+					}
+				}));
+	});
