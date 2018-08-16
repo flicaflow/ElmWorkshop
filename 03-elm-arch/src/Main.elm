@@ -11,12 +11,13 @@ import List
 
 type alias Model =
     { todos : List String
+    , inputText : String
     }
 
 
 initialModel : Model
 initialModel =
-    Model []
+    Model [] ""
 
 
 
@@ -26,6 +27,7 @@ initialModel =
 type Msg
     = Add String
     | Delete Int
+    | UpdateInput String
 
 
 
@@ -38,28 +40,56 @@ update msg model =
         Add todo ->
             { model
                 | todos = todo :: model.todos
+                , inputText = ""
             }
 
         Delete i ->
             { model
                 | todos =
                     List.append
-                        (List.take (i - 1) model.todos)
-                        (List.drop i model.todos)
+                        (List.take i model.todos)
+                        (List.drop (i + 1) model.todos)
+            }
+
+        UpdateInput inp ->
+            { model
+                | inputText = inp
             }
 
 
 view : Model -> Html Msg
 view model =
     div []
-        [ input [ type_ "text", placeholder "type here" ] []
-        , button [ onClick (Add "New Todo") ] [ text "add" ]
+        [ input
+            [ type_ "text"
+            , placeholder "type here"
+            , value model.inputText
+            , onInput UpdateInput
+            ]
+            []
+        , button [ onClick (Add model.inputText) ] [ text "add" ]
         , ul []
-            (List.map
-                (\item -> li [] [ text item ])
-                model.todos
-            )
+            (todoItems model)
         ]
+
+
+type alias TModel a =
+    { a | todos : List String }
+
+
+todoItems : TModel Model -> List (Html Msg)
+todoItems model =
+    List.indexedMap
+        (\i item ->
+            li []
+                [ span [] [ text item ]
+                , button
+                    [ onClick (Delete i)
+                    ]
+                    [ text "delete" ]
+                ]
+        )
+        model.todos
 
 
 main =

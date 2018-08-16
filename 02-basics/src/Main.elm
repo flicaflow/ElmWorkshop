@@ -5,12 +5,13 @@ module Main exposing (..)
 --import List as MyList exposing (..)
 
 import List
+import Maybe exposing (..)
 
 
 -- Values
 
 
-aNumber : number
+aNumber : Int
 aNumber =
     777
 
@@ -29,12 +30,17 @@ add a b =
     a + b
 
 
+add2 : number -> number
+add2 =
+    add 2
+
+
 
 -- Flow Control
 -- If else
 
 
-greaterZero : comparable -> Bool
+greaterZero : Int -> Bool
 greaterZero x =
     if x > 0 then
         True
@@ -43,22 +49,27 @@ greaterZero x =
 
 
 type T
-    = A
-    | B
+    = A String
+    | B Int
     | C
 
 
-toString : T -> String
-toString t =
+cases : T -> String
+cases t =
     case t of
-        A ->
-            "A"
+        A s ->
+            "A " ++ s
 
-        B ->
-            "B"
+        B i ->
+            "B" ++ Basics.toString i
 
         C ->
             "C"
+
+
+testA =
+    A "Hello"
+        |> cases
 
 
 
@@ -95,22 +106,14 @@ addOnFront =
 
 firstFromList1 : List Int -> Int
 firstFromList1 l =
-    let
-        maybeFirst =
-            List.head l
-    in
-    case maybeFirst of
-        Just f ->
-            f
-
-        Nothing ->
-            -1
+    List.head l
+        |> withDefault -1
 
 
 firstFromList : List Int -> Int
 firstFromList l =
     case l of
-        first :: _ ->
+        first :: (second :: tail) ->
             first
 
         _ ->
@@ -127,7 +130,11 @@ aTuple =
 
 
 first : ( Int, Int ) -> Int
-first ( first, second ) =
+first t =
+    let
+        ( first, second ) =
+            t
+    in
     first
 
 
@@ -143,9 +150,7 @@ type alias R =
 
 vR : R
 vR =
-    { name = "Me"
-    , age = 42
-    }
+    R "Me" 42
 
 
 printR : R -> String
@@ -193,10 +198,6 @@ letItPrint =
             , age = 33
             }
         )
-
-
-
--- Pipes
 
 
 noPipes : Float -> Float -> Float

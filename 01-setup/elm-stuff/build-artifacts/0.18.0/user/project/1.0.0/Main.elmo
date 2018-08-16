@@ -1,4 +1,0 @@
-var _user$project$Main$view = A2(
-	_elm_lang$html$Html$p,
-	{ctor: '[]'},
-	{ctor: '[]'});
