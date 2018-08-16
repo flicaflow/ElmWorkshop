@@ -4,6 +4,8 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import List
+import Msg exposing (..)
+import TodoList
 
 
 -- Model
@@ -18,16 +20,6 @@ type alias Model =
 initialModel : Model
 initialModel =
     Model [] ""
-
-
-
--- Messages
-
-
-type Msg
-    = Add String
-    | Delete Int
-    | UpdateInput String
 
 
 
@@ -57,39 +49,19 @@ update msg model =
             }
 
 
+todoConfig =
+    { updateInput = UpdateInput
+    , add = Add
+    , delete = Delete
+    }
+
+
 view : Model -> Html Msg
 view model =
     div []
-        [ input
-            [ type_ "text"
-            , placeholder "type here"
-            , value model.inputText
-            , onInput UpdateInput
-            ]
-            []
-        , button [ onClick (Add model.inputText) ] [ text "add" ]
-        , ul []
-            (todoItems model)
+        [ button [] [ text "+" ]
+        , TodoList.view todoConfig model.todos model.inputText
         ]
-
-
-type alias TModel a =
-    { a | todos : List String }
-
-
-todoItems : TModel Model -> List (Html Msg)
-todoItems model =
-    List.indexedMap
-        (\i item ->
-            li []
-                [ span [] [ text item ]
-                , button
-                    [ onClick (Delete i)
-                    ]
-                    [ text "delete" ]
-                ]
-        )
-        model.todos
 
 
 main =
